@@ -6,7 +6,7 @@
     <title>오늘의 메뉴 마스터 (Menu Master)</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght=300;400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
         body { font-family: 'Noto Sans KR', sans-serif; }
     </style>
 </head>
@@ -14,7 +14,7 @@
 
     <header class="bg-white shadow-sm border-b border-slate-200 py-6 text-center">
         <h1 class="text-3xl font-bold text-emerald-600 tracking-tight">🍽️ 오늘의 메뉴 마스터</h1>
-        <p class="text-sm text-slate-500 mt-1">오늘 뭐 먹지? 복잡한 조건 없이 클릭 한 번으로 결정하는 점심 메뉴 추천 가이드</p>
+        <p class="text-sm text-slate-500 mt-1">오늘 뭐 먹지? 귀여운 유령 요정이 메뉴를 골라줄 거예요!</p>
     </header>
 
     <main class="max-w-4xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -34,10 +34,10 @@
                     <p id="question-text" class="text-lg font-medium text-slate-700 mb-6">오늘 당기는 요리 스타일은?</p>
                     <div class="grid grid-cols-2 gap-4">
                         <button onclick="nextQuestion('A')" id="option-a" class="py-8 px-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl font-medium text-slate-800 transition shadow-sm hover:scale-[1.02] active:scale-[0.98] cursor-pointer">
-                            🍲 따뜻한 국물
+                            🍲 따뜻한 국물 요리
                         </button>
                         <button onclick="nextQuestion('B')" id="option-b" class="py-8 px-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl font-medium text-slate-800 transition shadow-sm hover:scale-[1.02] active:scale-[0.98] cursor-pointer">
-                            🍱 깔끔한 건조식
+                            🍱 깔끔한 건조식 요리
                         </button>
                     </div>
                 </div>
@@ -50,35 +50,31 @@
                     <button onclick="restartGame()" class="mt-6 text-xs text-emerald-600 underline font-medium cursor-pointer hover:text-emerald-700">다시 테스트하기</button>
                 </div>
             </div>
-            <div class="text-xs text-slate-400 mt-4 pt-3 border-t border-slate-100">※ 클릭 상호작용에 따라 상태가 동적으로 변합니다.</div>
         </section>
 
         <section class="bg-white rounded-2xl shadow-md p-6 border border-slate-100 flex flex-col justify-between">
             <div class="text-center py-6">
-                <h2 class="text-xl font-bold text-slate-900 mb-2 text-left">🎲 2. 아무거나 메뉴 랜덤 추천</h2>
-                <p class="text-sm text-slate-400 text-left mb-8">고민하기 귀찮을 땐? 버튼을 누르면 점심 메뉴를 무작위로 하나 뽑아줍니다.</p>
+                <h2 class="text-xl font-bold text-slate-900 mb-2 text-left">👻 2. 유령 요정의 메뉴 추천</h2>
+                <p class="text-sm text-slate-400 text-left mb-8">고민될 땐? 유령 요정에게 물어보세요!</p>
                 
-                <div class="bg-emerald-50/50 border border-emerald-100 rounded-2xl p-8 my-6 min-h-[160px] flex flex-col justify-center items-center">
-                    <div id="random-emoji" class="text-5xl mb-3">❓</div>
-                    <h3 id="random-menu-name" class="text-2xl font-bold text-slate-800">버튼을 눌러주세요</h3>
-                    <p id="random-menu-cate" class="text-xs text-slate-400 mt-1"></p>
+                <div class="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-8 my-6 min-h-[160px] flex flex-col justify-center items-center">
+                    <div id="random-emoji" class="text-6xl mb-3">👻</div>
+                    <h3 id="random-menu-name" class="text-2xl font-bold text-slate-800">요정을 호출하세요!</h3>
+                    <p id="random-menu-cate" class="text-xs text-indigo-400 mt-2 font-medium"></p>
                 </div>
 
-                <button onclick="pickRandomMenu()" class="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-xl text-base shadow transition cursor-pointer">
-                    오늘의 점심 메뉴 뽑기 🚀
+                <button onclick="pickRandomMenu()" class="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl text-base shadow transition cursor-pointer">
+                    요정님, 오늘 뭐 먹을까요? 👻
                 </button>
             </div>
-            <div class="text-xs text-slate-400 mt-4 pt-3 border-t border-slate-100">※ JavaScript의 Math.random() 함수를 활용한 실시간 연산 기능입니다.</div>
         </section>
-
     </main>
 
     <footer class="text-center text-xs text-slate-400 py-8">
-        © 2026 컴퓨터 개론 과제 2 · AI 활용 프론트엔드 목업 프로젝트
+        © 2026 컴퓨터 개론 과제 2 · 엉뚱한 유령 요정과 함께하는 점심 여행
     </footer>
 
     <script>
-        // --- 1. 전체 메뉴 데이터 목록 ---
         const menuList = [
             { name: "부대찌개 / 김치찌개", category: "한식", emoji: "🥘" },
             { name: "제육볶음 정식", category: "한식", emoji: "🍛" },
@@ -93,14 +89,13 @@
             { name: "든든한 돼지국밥 / 설렁탕", category: "한식", emoji: "🥣" }
         ];
 
-        // --- 2. 밸런스 게임 로직 ---
+        // 밸런스 게임 로직
         let currentStep = 1;
         let gameAnswers = [];
-        
         const questions = [
             { text: "오늘 당기는 요리 스타일은?", a: "🍲 따뜻한 국물 요리", b: "🍱 깔끔한 건조식 요리" },
             { text: "선호하는 맛의 종류는?", a: "🔥 매콤하고 자극적인 맛", b: "🌿 담백하고 고소한 맛" },
-            { text: "식사 후 생각나는 디저트는?", a: "☕ 깔끔한 아메리카노", b: "🍦 달콤한 아이스크림" }
+            { text: "누구와 함께 식사하시나요?", a: "👥 여럿이서 즐겁게 (단체)", b: "👤 혼자 편안하게 (혼밥)" }
         ];
 
         function nextQuestion(choice) {
@@ -109,13 +104,10 @@
                 currentStep++;
                 document.getElementById('game-step').innerText = `${currentStep} / 3 단계`;
                 document.getElementById('progress-bar').style.width = `${(currentStep / 3) * 100}%`;
-                
                 document.getElementById('question-text').innerText = questions[currentStep - 1].text;
                 document.getElementById('option-a').innerText = questions[currentStep - 1].a;
                 document.getElementById('option-b').innerText = questions[currentStep - 1].b;
-            } else {
-                showGameResult();
-            }
+            } else { showGameResult(); }
         }
 
         function showGameResult() {
@@ -123,46 +115,37 @@
             document.getElementById('result-box').classList.remove('hidden');
             document.getElementById('progress-bar').style.width = '100%';
             document.getElementById('game-step').innerText = `완료`;
-
-            let title = "";
-            let desc = "";
-            const pattern = gameAnswers.join('');
-
-            if (pattern.startsWith('A')) {
-                title = "든든한 국물 마니아";
-                desc = "얼큰한 찌개나 뜨끈한 마라탕, 짬뽕, 국밥처럼 깊고 따뜻한 국물로 속을 채우는 걸 좋아하는군요! 오늘 점심은 든든한 국물 메뉴를 추천합니다.";
-            } else {
-                title = "깔끔한 별미/정식 선호파";
-                desc = "바삭한 돈까스나 제육덮밥, 혹은 고소한 파스타나 버거 세트처럼 한 그릇으로 깔끔하고 트렌디하게 먹는 식사가 어울리는 날입니다!";
-            }
-
+            let title = (gameAnswers[0] === 'A') ? "든든한 국물 마니아" : "깔끔한 별미 선호파";
+            let desc = (gameAnswers[0] === 'A') ? "국물 요리를 추천합니다!" : "깔끔한 요리를 추천합니다!";
             document.getElementById('result-title').innerText = title;
             document.getElementById('result-desc').innerText = desc;
         }
 
         function restartGame() {
-            currentStep = 1;
-            gameAnswers = [];
+            currentStep = 1; gameAnswers = [];
             document.getElementById('game-step').innerText = `1 / 3 단계`;
             document.getElementById('progress-bar').style.width = '33.3%';
             document.getElementById('question-text').innerText = questions[0].text;
             document.getElementById('option-a').innerText = questions[0].a;
             document.getElementById('option-b').innerText = questions[0].b;
-            
             document.getElementById('result-box').classList.add('hidden');
             document.getElementById('game-box').classList.remove('hidden');
         }
 
-        // --- 3. 랜덤 메뉴 뽑기 로직 ---
+        // 유령 요정의 메뉴 추천 로직
         function pickRandomMenu() {
-            // 배열에서 무작위 하나 추출
-            const randomIndex = Math.floor(Math.random() * menuList.length);
-            const selectedMenu = menuList[randomIndex];
-
-            // 화면에 렌더링 수정
+            const ghostPhrases = [
+                "👻 부우~ 오늘 점심은 이게 어때?",
+                "👻 슥~ 나타난 유령 요정의 메뉴는!",
+                "👻 냠냠... 내 메뉴도 뺏어 먹을래?",
+                "👻 우와~ 오늘 점심은 이거야!"
+            ];
+            const phrase = ghostPhrases[Math.floor(Math.random() * ghostPhrases.length)];
+            const selectedMenu = menuList[Math.floor(Math.random() * menuList.length)];
+            
             document.getElementById('random-emoji').innerText = selectedMenu.emoji;
             document.getElementById('random-menu-name').innerText = selectedMenu.name;
-            document.getElementById('random-menu-cate').innerText = `카테고리: ${selectedMenu.category}`;
+            document.getElementById('random-menu-cate').innerText = phrase;
         }
     </script>
 </body>
