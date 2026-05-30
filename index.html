@@ -117,18 +117,28 @@
             document.getElementById('progress-bar').style.width = '100%';
             document.getElementById('game-step').innerText = `완료`;
 
-            const withPerson = gameAnswers[2] === 'A';
             const isSoup = gameAnswers[0] === 'A';
+            const isSpicy = gameAnswers[1] === 'A';
+            const withPerson = gameAnswers[2] === 'A';
 
             let title, desc;
-            if (withPerson) {
-                title = "함께하는 즐거운 점심 식사";
-                desc = isSoup ? "동료와 함께 뜨끈한 국물 요리를 나눠 먹으며 담소를 나눠보세요. 부대찌개나 마라탕처럼 같이 끓여 먹는 메뉴가 딱입니다!" 
-                              : "동료와 함께 깔끔하고 세련된 한 끼 어때요? 돈까스나 파스타처럼 깔끔한 메뉴가 대화하기에 가장 좋습니다.";
+            
+            if (isSoup && isSpicy) {
+                title = "화끈한 국물로 스트레스 해소!";
+                desc = withPerson ? "동료와 함께 얼큰한 마라탕이나 부대찌개 어때요? 땀 흘리며 스트레스를 날려버리세요." 
+                                  : "혼자라면 얼큰한 짬뽕이나 국밥이 최고죠! 오늘따라 화끈한 국물이 당기는 당신에게 추천합니다.";
+            } else if (isSoup && !isSpicy) {
+                title = "속이 편안해지는 따뜻한 국물";
+                desc = withPerson ? "동료와 함께 담백한 설렁탕이나 맑은 국물 요리로 든든한 점심을 즐겨보세요." 
+                                  : "혼자만의 여유를 담백하고 따뜻한 국물로 채워보세요. 속까지 편안해지는 식사가 될 거예요.";
+            } else if (!isSoup && isSpicy) {
+                title = "입맛을 돋우는 매콤한 한 끼";
+                desc = withPerson ? "매콤한 제육볶음이나 떡볶이 어때요? 입맛 당기는 메뉴로 즐거운 대화를 나눠보세요."
+                                  : "혼자서도 화끈하게! 매콤한 비빔밥이나 떡볶이로 오늘 점심에 활력을 더해보세요.";
             } else {
-                title = "나만의 소중한 점심 시간";
-                desc = isSoup ? "혼자만의 여유를 즐기며 뜨끈한 국밥이나 짬뽕 한 그릇 어떠세요? 누구 눈치 보지 말고 깊은 국물 맛을 음미해 보세요!" 
-                              : "혼자서 깔끔하고 간편하게 즐기는 식사를 추천해요. 버거 세트나 비빔밥처럼 빠르게 먹고 남은 시간을 휴식으로 채워보세요.";
+                title = "깔끔하고 담백한 즐거움";
+                desc = withPerson ? "깔끔한 돈까스나 파스타를 추천해요. 대화하기 좋고 맛도 정갈한 메뉴로 분위기를 맞춰보세요."
+                                  : "간편하게 즐기는 돈까스나 버거 어떠세요? 깔끔하고 빠르게 식사하고 남은 시간을 푹 쉬어보세요.";
             }
 
             document.getElementById('result-title').innerText = title;
