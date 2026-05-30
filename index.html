@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>오늘의 메뉴 마스터 (Menu Master)</title>
+    <title>오늘의 메뉴 마스터</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
@@ -14,93 +14,78 @@
 
     <header class="bg-white shadow-sm border-b border-slate-200 py-6 text-center">
         <h1 class="text-3xl font-bold text-emerald-600 tracking-tight">🍽️ 오늘의 메뉴 마스터</h1>
-        <p class="text-sm text-slate-500 mt-1">오늘 뭐 먹지? 귀여운 유령 요정이 상황에 맞게 골라줄 거예요!</p>
     </header>
 
     <main class="max-w-4xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-        <section class="bg-white rounded-2xl shadow-md p-6 border border-slate-100 flex flex-col justify-between">
-            <div>
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-bold text-slate-900">🎯 1. 취향 밸런스 게임</h2>
-                    <span id="game-step" class="text-xs font-semibold bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full">1 / 3 단계</span>
+        <section class="bg-white rounded-2xl shadow-md p-6 border border-slate-100 flex flex-col">
+            <h2 class="text-xl font-bold text-slate-900 mb-4">🎯 1. 상황별 메뉴 결정</h2>
+            <div id="game-box">
+                <p id="question-text" class="text-lg font-medium text-slate-700 mb-6">누구와 함께 식사하시나요?</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <button onclick="setMode('group')" class="py-8 bg-slate-50 border rounded-xl hover:bg-emerald-50">👥 여럿이서 (단체)</button>
+                    <button onclick="setMode('solo')" class="py-8 bg-slate-50 border rounded-xl hover:bg-emerald-50">👤 혼자서 (혼밥)</button>
                 </div>
-                <div class="w-full bg-slate-100 h-2 rounded-full mb-6 overflow-hidden">
-                    <div id="progress-bar" class="bg-emerald-500 h-2 w-1/3 transition-all duration-300"></div>
-                </div>
-                <div id="game-box" class="py-4 text-center">
-                    <p id="question-text" class="text-lg font-medium text-slate-700 mb-6">오늘 당기는 요리 스타일은?</p>
-                    <div class="grid grid-cols-2 gap-4">
-                        <button onclick="nextQuestion('A')" id="option-a" class="py-8 px-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl font-medium text-slate-800 transition shadow-sm hover:scale-[1.02] cursor-pointer">🍲 따뜻한 국물</button>
-                        <button onclick="nextQuestion('B')" id="option-b" class="py-8 px-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl font-medium text-slate-800 transition shadow-sm hover:scale-[1.02] cursor-pointer">🍱 깔끔한 건조식</button>
-                    </div>
-                </div>
-                <div id="result-box" class="hidden py-6 text-center">
-                    <div class="text-5xl mb-3">👑</div>
-                    <h3 id="result-title" class="text-2xl font-bold text-emerald-600 my-2"></h3>
-                    <p id="result-desc" class="text-slate-600 text-sm px-4 bg-slate-50 py-3 rounded-lg border border-slate-100"></p>
-                    <button onclick="restartGame()" class="mt-6 text-xs text-emerald-600 underline font-medium cursor-pointer">다시 테스트하기</button>
-                </div>
+            </div>
+            <div id="result-box" class="hidden text-center py-4">
+                <h3 id="result-title" class="text-2xl font-bold text-emerald-600"></h3>
+                <p id="result-desc" class="text-slate-600 my-4"></p>
+                <button onclick="pickFairyMenu()" class="w-full py-4 bg-emerald-600 text-white rounded-xl">요정님, 메뉴 추천해주세요!</button>
+                <button onclick="location.reload()" class="mt-4 text-xs underline">다시 하기</button>
             </div>
         </section>
 
-        <section class="bg-white rounded-2xl shadow-md p-6 border border-slate-100 flex flex-col justify-between">
-            <div class="text-center py-6">
-                <h2 class="text-xl font-bold text-slate-900 mb-2 text-left">👻 2. 유령 요정의 메뉴 추천</h2>
-                <div class="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-8 my-6 min-h-[160px] flex flex-col justify-center items-center">
-                    <div id="random-emoji" class="text-6xl mb-3">👻</div>
-                    <h3 id="random-menu-name" class="text-2xl font-bold text-slate-800">버튼을 눌러주세요!</h3>
-                    <p id="random-menu-cate" class="text-xs text-indigo-400 mt-2 font-medium"></p>
-                </div>
-                <button onclick="pickRandomMenu()" class="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl text-base shadow transition cursor-pointer">
-                    요정님, 오늘 뭐 먹을까요? 👻
-                </button>
+        <section class="bg-white rounded-2xl shadow-md p-6 border border-slate-100 flex flex-col">
+            <h2 class="text-xl font-bold text-slate-900 mb-4">👻 2. 랜덤 메뉴 뽑기 (상관없음)</h2>
+            <div class="bg-indigo-50/50 p-8 my-auto text-center rounded-2xl">
+                <div id="random-emoji" class="text-6xl mb-3">👻</div>
+                <h3 id="random-menu-name" class="text-2xl font-bold">버튼을 눌러보세요!</h3>
+                <p id="random-menu-desc" class="text-sm text-indigo-400 mt-2"></p>
             </div>
+            <button onclick="pickRandomMenu()" class="w-full py-4 bg-indigo-600 text-white rounded-xl">아무거나 랜덤 추천! 👻</button>
         </section>
     </main>
 
-    <footer class="text-center text-xs text-slate-400 py-8">© 2026 컴퓨터 개론 과제 2</footer>
-
     <script>
-        const menuList = {
-            group: [{name:"부대찌개", emoji:"🥘"}, {name:"마라탕", emoji:"🥢"}, {name:"짜장면", emoji:"🍜"}, {name:"파스타", emoji:"🍝"}],
-            solo: [{name:"제육볶음", emoji:"🍛"}, {name:"돈까스", emoji:"🐷"}, {name:"치즈버거", emoji:"🍔"}, {name:"돼지국밥", emoji:"🥣"}]
+        // 전체 데이터
+        const menuData = {
+            group: [
+                { name: "부대찌개", desc: "함께 끓여 먹는 얼큰한 국물 요리!", emoji: "🥘" },
+                { name: "마라탕", desc: "각자 담아 나눠 먹기 좋은 최고의 메뉴!", emoji: "🥢" },
+                { name: "짜장면&짬뽕", desc: "여럿이서 나누어 먹는 중식의 정석!", emoji: "🍜" }
+            ],
+            solo: [
+                { name: "제육볶음 정식", desc: "혼자서도 든든하게 즐기는 한식 백반!", emoji: "🍛" },
+                { name: "등심 돈까스", desc: "바삭하고 깔끔한 혼밥의 강자!", emoji: "🐷" },
+                { name: "치즈 버거 세트", desc: "빠르고 간편하게 즐기는 최고의 맛!", emoji: "🍔" }
+            ]
         };
+        
+        let currentMode = '';
 
-        let currentStep = 1;
-        let isSolo = false;
-
-        function nextQuestion(choice) {
-            if (currentStep === 3) isSolo = (choice === 'B');
-            if (currentStep < 3) {
-                currentStep++;
-                const questions = [
-                    {text:"오늘 당기는 요리 스타일은?", a:"🍲 따뜻한 국물", b:"🍱 깔끔한 건조식"},
-                    {text:"선호하는 맛의 종류는?", a:"🔥 매콤한 맛", b:"🌿 담백한 맛"},
-                    {text:"누구와 함께 식사하시나요?", a:"👥 여럿이서", b:"👤 혼자서"}
-                ];
-                document.getElementById('game-step').innerText = `${currentStep} / 3 단계`;
-                document.getElementById('progress-bar').style.width = `${(currentStep / 3) * 100}%`;
-                document.getElementById('question-text').innerText = questions[currentStep-1].text;
-                document.getElementById('option-a').innerText = questions[currentStep-1].a;
-                document.getElementById('option-b').innerText = questions[currentStep-1].b;
-            } else {
-                document.getElementById('game-box').classList.add('hidden');
-                document.getElementById('result-box').classList.remove('hidden');
-                document.getElementById('result-title').innerText = isSolo ? "혼밥 만렙 긍정왕" : "파티 피플의 즐거운 식사";
-                document.getElementById('result-desc').innerText = isSolo ? "혼자서도 야무지게! 맛있는 한 끼를 추천해 드릴게요." : "함께 먹으면 두 배로 맛있죠! 다 같이 즐거운 식사를 준비하세요.";
-            }
+        function setMode(mode) {
+            currentMode = mode;
+            document.getElementById('game-box').classList.add('hidden');
+            document.getElementById('result-box').classList.remove('hidden');
+            document.getElementById('result-title').innerText = mode === 'group' ? "파티 피플!" : "혼밥 마스터!";
+            document.getElementById('result-desc').innerText = mode === 'group' ? "여럿이서 즐기기 좋은 메뉴를 준비했어요." : "혼자서도 야무지게 즐길 메뉴를 추천합니다.";
         }
 
-        function pickRandomMenu() {
-            const list = isSolo ? menuList.solo : menuList.group;
+        // 1. 상황 고려 추천
+        function pickFairyMenu() {
+            const list = menuData[currentMode];
             const menu = list[Math.floor(Math.random() * list.length)];
             document.getElementById('random-emoji').innerText = menu.emoji;
             document.getElementById('random-menu-name').innerText = menu.name;
-            document.getElementById('random-menu-cate').innerText = `👻 유령 요정: "${isSolo ? '혼자 맛있게 먹어!' : '여럿이서 나누면 더 맛있어!'}"`;
+            document.getElementById('random-menu-desc').innerText = "요정 추천: " + menu.desc;
         }
 
-        function restartGame() {
-            location.reload();
+        // 2. 상황 상관없는 랜덤 추천
+        function pickRandomMenu() {
+            const allMenus = [...menuData.group, ...menuData.solo];
+            const menu = allMenus[Math.floor(Math.random() * allMenus.length)];
+            document.getElementById('random-emoji').innerText = menu.emoji;
+            document.getElementById('random-menu-name').innerText = menu.name;
+            document.getElementById('random-menu-desc').innerText = "요정의 기분 내키는 대로: " + menu.desc;
         }
     </script>
 </body>
