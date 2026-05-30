@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>오늘의 메뉴 마스터 (Menu Master)</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght=300;400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
         body { font-family: 'Noto Sans KR', sans-serif; }
     </style>
 </head>
@@ -14,7 +14,7 @@
 
     <header class="bg-white shadow-sm border-b border-slate-200 py-6 text-center">
         <h1 class="text-3xl font-bold text-emerald-600 tracking-tight">🍽️ 오늘의 메뉴 마스터</h1>
-        <p class="text-sm text-slate-500 mt-1">오늘 뭐 먹지? 복잡한 조건 없이 클릭 한 번으로 결정하는 점심 메뉴 추천 가이드</p>
+        <p class="text-sm text-slate-500 mt-1">상황과 날씨에 맞춰 최적의 점심 메뉴를 결정하는 스마트 가이드</p>
     </header>
 
     <main class="max-w-4xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -33,69 +33,62 @@
                 <div id="game-box" class="py-4 text-center">
                     <p id="question-text" class="text-lg font-medium text-slate-700 mb-6">오늘 당기는 요리 스타일은?</p>
                     <div class="grid grid-cols-2 gap-4">
-                        <button onclick="nextQuestion('A')" id="option-a" class="py-8 px-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl font-medium text-slate-800 transition shadow-sm hover:scale-[1.02] active:scale-[0.98] cursor-pointer">
-                            🍲 따뜻한 국물 요리
-                        </button>
-                        <button onclick="nextQuestion('B')" id="option-b" class="py-8 px-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl font-medium text-slate-800 transition shadow-sm hover:scale-[1.02] active:scale-[0.98] cursor-pointer">
-                            🍱 깔끔한 건조식 요리
-                        </button>
+                        <button onclick="nextQuestion('A')" id="option-a" class="py-8 px-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl font-medium text-slate-800 transition shadow-sm hover:scale-[1.02] active:scale-[0.98] cursor-pointer">🍲 따뜻한 국물 요리</button>
+                        <button onclick="nextQuestion('B')" id="option-b" class="py-8 px-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl font-medium text-slate-800 transition shadow-sm hover:scale-[1.02] active:scale-[0.98] cursor-pointer">🍱 깔끔한 건조식 요리</button>
                     </div>
                 </div>
 
                 <div id="result-box" class="hidden py-6 text-center">
                     <div class="text-5xl mb-3">👑</div>
-                    <p class="text-sm text-slate-400 font-medium">당신의 오늘 점심 성향은</p>
-                    <h3 id="result-title" class="text-2xl font-bold text-emerald-600 my-2">[결과 유형]</h3>
-                    <p id="result-desc" class="text-slate-600 text-sm px-4 bg-slate-50 py-3 rounded-lg border border-slate-100">결과 설명이 여기에 표시됩니다.</p>
-                    <button onclick="restartGame()" class="mt-6 text-xs text-emerald-600 underline font-medium cursor-pointer hover:text-emerald-700">다시 테스트하기</button>
+                    <h3 id="result-title" class="text-2xl font-bold text-emerald-600 my-2"></h3>
+                    <p id="result-desc" class="text-slate-600 text-sm px-4 bg-slate-50 py-3 rounded-lg border border-slate-100"></p>
+                    <button onclick="restartGame()" class="mt-6 text-xs text-emerald-600 underline font-medium cursor-pointer">다시 테스트하기</button>
                 </div>
             </div>
         </section>
 
         <section class="bg-white rounded-2xl shadow-md p-6 border border-slate-100 flex flex-col justify-between">
             <div class="text-center py-6">
-                <h2 class="text-xl font-bold text-slate-900 mb-2 text-left">🎲 2. 아무거나 메뉴 랜덤 추천</h2>
-                <p class="text-sm text-slate-400 text-left mb-8">고민하기 귀찮을 땐? 버튼을 누르면 점심 메뉴를 무작위로 하나 뽑아줍니다.</p>
+                <h2 class="text-xl font-bold text-slate-900 mb-2 text-left">🎲 2. 날씨 맞춤 메뉴 추천</h2>
+                <p class="text-sm text-slate-400 text-left mb-8">오늘의 날씨 데이터를 시뮬레이션하여 딱 맞는 메뉴를 뽑아줍니다.</p>
                 
-                <div class="bg-emerald-50/50 border border-emerald-100 rounded-2xl p-8 my-6 min-h-[160px] flex flex-col justify-center items-center">
+                <div class="bg-emerald-50/50 border border-emerald-100 rounded-2xl p-8 my-6 min-h-[180px] flex flex-col justify-center items-center">
                     <div id="random-emoji" class="text-5xl mb-3">❓</div>
                     <h3 id="random-menu-name" class="text-2xl font-bold text-slate-800">버튼을 눌러주세요</h3>
-                    <p id="random-menu-cate" class="text-xs text-slate-400 mt-1"></p>
+                    <p id="random-menu-cate" class="text-xs text-emerald-700 font-bold mt-2"></p>
                 </div>
 
                 <button onclick="pickRandomMenu()" class="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-xl text-base shadow transition cursor-pointer">
-                    오늘의 점심 메뉴 뽑기 🚀
+                    날씨에 맞춰 뽑기 🚀
                 </button>
             </div>
         </section>
     </main>
 
     <footer class="text-center text-xs text-slate-400 py-8">
-        © 2026 컴퓨터 개론 과제 2 · AI 활용 프론트엔드 목업 프로젝트
+        © 2026 컴퓨터 개론 과제 2 · AI 활용 데이터 기반 추천 시스템
     </footer>
 
     <script>
+        // 날씨 필터링을 위한 데이터셋 (condition 속성 추가)
         const menuList = [
-            { name: "부대찌개 / 김치찌개", category: "한식", emoji: "🥘" },
-            { name: "제육볶음 정식", category: "한식", emoji: "🍛" },
-            { name: "바삭한 등심 돈까스", category: "일식", emoji: "🐷" },
-            { name: "치즈밥 / 비빔밥", category: "분식/퓨전", emoji: "🧀" },
-            { name: "얼큰한 마라탕", category: "아시안", emoji: "🥢" },
-            { name: "짜장면 & 짬뽕", category: "중식", emoji: "🍜" },
-            { name: "토마토 / 크림 파스타", category: "양식", emoji: "🍝" },
-            { name: "치즈 버거 세트", category: "패스트푸드", emoji: "🍔" },
-            { name: "매콤한 떡볶이와 튀김", category: "분식", emoji: "🍢" },
-            { name: "시원한 초밥 정식", category: "일식", emoji: "🍣" },
-            { name: "든든한 돼지국밥 / 설렁탕", category: "한식", emoji: "🥣" }
+            { name: "부대찌개", category: "한식", condition: "rainy", emoji: "🥘" },
+            { name: "칼국수와 파전", category: "한식", condition: "rainy", emoji: "🍜" },
+            { name: "냉면", category: "한식", condition: "sunny", emoji: "❄️" },
+            { name: "초밥 세트", category: "일식", condition: "sunny", emoji: "🍣" },
+            { name: "제육볶음 정식", category: "한식", condition: "cloudy", emoji: "🍛" },
+            { name: "치즈 버거 세트", category: "패스트푸드", condition: "cloudy", emoji: "🍔" }
         ];
 
-        let currentStep = 1;
-        let gameAnswers = [];
+        // 밸런스 게임 질문 데이터
         const questions = [
             { text: "오늘 당기는 요리 스타일은?", a: "🍲 따뜻한 국물 요리", b: "🍱 깔끔한 건조식 요리" },
             { text: "선호하는 맛의 종류는?", a: "🔥 매콤하고 자극적인 맛", b: "🌿 담백하고 고소한 맛" },
             { text: "오늘 누구와 함께 식사하시나요?", a: "👥 직장 동료/친구와 함께", b: "👤 오늘은 혼자서 여유롭게" }
         ];
+
+        let currentStep = 1;
+        let gameAnswers = [];
 
         function nextQuestion(choice) {
             gameAnswers.push(choice);
@@ -115,44 +108,29 @@
             document.getElementById('game-box').classList.add('hidden');
             document.getElementById('result-box').classList.remove('hidden');
             document.getElementById('progress-bar').style.width = '100%';
-            document.getElementById('game-step').innerText = `완료`;
-
             const withPerson = gameAnswers[2] === 'A';
             const isSoup = gameAnswers[0] === 'A';
 
-            let title, desc;
-            if (withPerson) {
-                title = "함께하는 즐거운 점심 식사";
-                desc = isSoup ? "동료와 함께 뜨끈한 국물 요리를 나눠 먹으며 담소를 나눠보세요. 부대찌개나 마라탕처럼 같이 끓여 먹는 메뉴가 딱입니다!" 
-                              : "동료와 함께 깔끔하고 세련된 한 끼 어때요? 돈까스나 파스타처럼 깔끔한 메뉴가 대화하기에 가장 좋습니다.";
-            } else {
-                title = "나만의 소중한 점심 시간";
-                desc = isSoup ? "혼자만의 여유를 즐기며 뜨끈한 국밥이나 짬뽕 한 그릇 어떠세요? 누구 눈치 보지 말고 깊은 국물 맛을 음미해 보세요!" 
-                              : "혼자서 깔끔하고 간편하게 즐기는 식사를 추천해요. 버거 세트나 비빔밥처럼 빠르게 먹고 남은 시간을 휴식으로 채워보세요.";
-            }
-
-            document.getElementById('result-title').innerText = title;
-            document.getElementById('result-desc').innerText = desc;
+            document.getElementById('result-title').innerText = withPerson ? "함께하는 즐거운 식사" : "나만의 소중한 점심 시간";
+            document.getElementById('result-desc').innerText = isSoup ? "국물 요리로 든든하게 속을 채워보세요!" : "깔끔하고 세련된 메뉴가 기분을 좋게 해줄 거예요.";
         }
 
         function restartGame() {
-            currentStep = 1;
-            gameAnswers = [];
-            document.getElementById('game-step').innerText = `1 / 3 단계`;
-            document.getElementById('progress-bar').style.width = '33.3%';
-            document.getElementById('question-text').innerText = questions[0].text;
-            document.getElementById('option-a').innerText = questions[0].a;
-            document.getElementById('option-b').innerText = questions[0].b;
-            document.getElementById('result-box').classList.add('hidden');
-            document.getElementById('game-box').classList.remove('hidden');
+            location.reload();
         }
 
+        // 날씨 기반 필터링 추천 로직
         function pickRandomMenu() {
-            const randomIndex = Math.floor(Math.random() * menuList.length);
-            const selectedMenu = menuList[randomIndex];
-            document.getElementById('random-emoji').innerText = selectedMenu.emoji;
-            document.getElementById('random-menu-name').innerText = selectedMenu.name;
-            document.getElementById('random-menu-cate').innerText = `카테고리: ${selectedMenu.category}`;
+            const conditions = ['sunny', 'rainy', 'cloudy'];
+            const randomWeather = conditions[Math.floor(Math.random() * conditions.length)];
+            
+            // 데이터 필터링 (Array.filter)
+            const filtered = menuList.filter(item => item.condition === randomWeather);
+            const selected = filtered[Math.floor(Math.random() * filtered.length)];
+
+            document.getElementById('random-emoji').innerText = selected.emoji;
+            document.getElementById('random-menu-name').innerText = selected.name;
+            document.getElementById('random-menu-cate').innerText = `오늘의 날씨: ${randomWeather} | 카테고리: ${selected.category}`;
         }
     </script>
 </body>
